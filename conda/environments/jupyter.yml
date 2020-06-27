@@ -1,0 +1,10 @@
+name: jupyter
+channels:
+- conda-forge
+dependencies:
+- jupyterlab
+- python=3.7
+- matplotlib
+- scipy
+- numpy
+
