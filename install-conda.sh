@@ -36,4 +36,4 @@ elif [[ $TARGET_OS = "linux" ]]
 then
     install_conda $@ && \
 	source ~/.bash_profile
-
+fi
