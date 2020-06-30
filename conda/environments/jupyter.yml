@@ -2,9 +2,11 @@ name: jupyter
 channels:
 - conda-forge
 dependencies:
+- nodejs
 - jupyterlab
 - python=3.7
 - matplotlib
 - scipy
 - numpy
+
 

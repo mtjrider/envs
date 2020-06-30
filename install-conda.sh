@@ -11,19 +11,29 @@ install_conda() {
     then
 	echo $CONDA_MACOS
 	curl $CONDA_MACOS -o $2/miniconda.sh
+	bash $PREFIX/miniconda.sh -b -p $PREFIX/conda && \
+            $PREFIX/conda/bin/conda init && source ~/.bash_profile && \
+            conda update --name base conda --yes && \
+            rm -f $PREFIX/miniconda.sh	
     elif [[ $TARGET_OS = "linux" ]]
     then
 	echo $CONDA_LINUX
 	curl $CONDA_LINUX -o $2/miniconda.sh
+	bash $PREFIX/miniconda.sh -b -p $PREFIX/conda && \
+            $PREFIX/conda/bin/conda init && source ~/.bashrc && \
+            conda update --name base conda --yes && \
+            rm -f $PREFIX/miniconda.sh	
     else
 	exit -1
     fi
-
-    bash $PREFIX/miniconda.sh -b -p $PREFIX/conda && \
-        $PREFIX/conda/bin/conda init && source ~/.bashrc && \
-        conda update --name base conda --yes && \
-        rm -f $PREFIX/miniconda.sh
 }
 
-install_conda $@ && \
-    source ~/.bashrc
+if [[ $TARGET_OS = "macOS" ]]
+then
+    install_conda $@ && \
+	source ~/.bashrc
+elif [[ $TARGET_OS = "linux" ]]
+then
+    install_conda $@ && \
+	source ~/.bash_profile
+
