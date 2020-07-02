@@ -9,3 +9,7 @@ dependencies:
 - scipy
 - numpy
 - numba
+- pip
+- pip:
+  - line_profiler
+  - memory_profiler
