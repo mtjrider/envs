@@ -1,7 +1,0 @@
-name: cpp
-channels:
-- conda-forge
-dependencies:
-- cmake
-- python=3.8
-- cxx-compiler
