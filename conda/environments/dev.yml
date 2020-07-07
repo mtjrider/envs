@@ -1,15 +1,22 @@
-name: jupyter
+name: dev
 channels:
 - conda-forge
+- pytorch
 dependencies:
-- nodejs
-- jupyterlab
+- numpy
+- scipy
+- numba
+- pytorch
+- torchvision
+- opt_einsum
 - python=3.7
 - matplotlib
-- scipy
-- numpy
-- numba
+- jupyterlab
+- nodejs
 - pip
 - pip:
+  - sparse
+  - ray[all]
   - line_profiler
   - memory_profiler
+
