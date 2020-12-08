@@ -3,10 +3,13 @@ channels:
 - conda-forge
 - pytorch
 dependencies:
+- cmake
+- sympy
 - numpy
 - scipy
 - numba
 - pytorch
+- torchaudio
 - torchvision
 - opt_einsum
 - python=3.7
@@ -17,6 +20,10 @@ dependencies:
 - pip:
   - sparse
   - ray[all]
+  - cirq
+  - qsimcirq
+  - cirq[contrib]
+  - tensorflow
+  - tensorflow-quantum
   - line_profiler
   - memory_profiler
-
