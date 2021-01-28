@@ -1,7 +1,7 @@
 name: dev
 channels:
-- conda-forge
 - pytorch
+- conda-forge
 dependencies:
 - cmake
 - sympy
@@ -16,7 +16,7 @@ dependencies:
 - opt_einsum
 - python=3.7
 - matplotlib
-- jupyterlab
+- jupyterlab=2.*
 - nodejs
 - pip
 - pip:
@@ -29,3 +29,4 @@ dependencies:
   - tensorflow-quantum
   - line_profiler
   - memory_profiler
+  - jupyterlab-nvdashboard
