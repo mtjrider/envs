@@ -18,6 +18,7 @@ dependencies:
 - matplotlib
 - jupyterlab=2.*
 - nodejs
+- jedi=0.17.*
 - pip
 - pip:
   - sparse
