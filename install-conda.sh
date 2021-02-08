@@ -24,16 +24,16 @@ install_conda() {
             conda update --name base conda --yes && \
             rm -f $PREFIX/miniconda.sh	
     else
-	exit -1
+	    exit -1
     fi
 }
 
 if [[ $TARGET_OS = "macOS" ]]
 then
-    install_conda $@ && \
+    install_conda && \
 	source ~/.bash_profile
 elif [[ $TARGET_OS = "linux" ]]
 then
-    install_conda $@ && \
+    install_conda && \
     source ~/.bashrc
 fi

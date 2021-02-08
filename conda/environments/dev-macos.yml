@@ -1,0 +1,31 @@
+name: dev
+channels:
+- pytorch
+- conda-forge
+dependencies:
+- cmake
+- sympy
+- numpy
+- scipy
+- numba
+- pytorch
+- torchaudio
+- torchvision
+- torchaudio
+- opt_einsum
+- python=3.7
+- matplotlib
+- jupyterlab=2.*
+- nodejs
+- jedi=0.17.*
+- pip
+- pip:
+  - sparse
+  - ray[all]
+  - cirq
+  - qsimcirq
+  - cirq[contrib]
+  - tensorflow
+  - tensorflow-quantum
+  - line_profiler
+  - memory_profiler
