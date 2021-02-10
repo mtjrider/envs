@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+DIR=$(dirname $0)
 TARGET_OS=$1
 CC=$2
 CXX=$3
@@ -11,11 +12,11 @@ create_dev_env() {
     conda env remove --name dev
     if [[ ${TARGET_OS} = "macOS" ]]
     then
-        COMMAND="CC=${CC} CXX=${CXX} conda env create --name dev --file conda/environments/dev-macos.yml"
+        COMMAND="CC=${CC} CXX=${CXX} conda env create --name dev --file ${DIR}/conda/environments/dev-macos.yml"
         bash -c "echo ${COMMAND} && ${COMMAND}"
     elif [[ ${TARGET_OS} = "linux" ]]
     then
-        COMMAND="CC=${CC} CXX=${CXX} conda env create --name dev --file conda/environments/dev-linux.yml"
+        COMMAND="CC=${CC} CXX=${CXX} conda env create --name dev --file ${DIR}/conda/environments/dev-linux.yml"
         bash -c "echo ${COMMAND} && ${COMMAND}"
         conda activate dev && jupyter labextension install jupyterlab-nvdashboard
     else
