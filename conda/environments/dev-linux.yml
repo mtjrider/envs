@@ -8,6 +8,7 @@ dependencies:
 - numpy
 - scipy
 - numba
+- cudnn=8.*
 - cudatoolkit=11.0
 - pytorch
 - torchaudio
@@ -26,7 +27,7 @@ dependencies:
   - cirq
   - qsimcirq
   - cirq[contrib]
-  - tensorflow
+  - tensorflow-gpu
   - tensorflow-quantum
   - line_profiler
   - memory_profiler
