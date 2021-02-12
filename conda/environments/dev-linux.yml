@@ -4,6 +4,7 @@ channels:
 - conda-forge
 dependencies:  
 - cmake
+- cxx-compiler=1.0
 - sympy
 - numpy
 - scipy
@@ -11,6 +12,7 @@ dependencies:
 - nccl
 - cudnn=8.*
 - cudatoolkit=11.0
+- nvcc_linux-64
 - pytorch
 - torchaudio
 - torchvision
@@ -21,7 +23,7 @@ dependencies:
 - jupyterlab=2.*
 - nodejs
 - jedi=0.17.*
-- openmpi=3.1.2
+- mpi4py
 - pip
 - pip:
   - sparse
@@ -29,6 +31,7 @@ dependencies:
   - cirq
   - qsimcirq
   - cirq[contrib]
+  - tensorboard
   - tensorflow-gpu
   - tensorflow-quantum
   - line_profiler
