@@ -30,7 +30,7 @@ dependencies:
   - cirq[contrib]
   - tensorflow-gpu
   - tensorflow-quantum
-  - horovod[all-frameworks]
+  - horovod[tensorflow, pytorch]
   - line_profiler
   - memory_profiler
   - jupyterlab-nvdashboard
