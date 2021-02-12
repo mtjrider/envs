@@ -31,7 +31,7 @@ dependencies:
   - cirq[contrib]
   - tensorflow-gpu
   - tensorflow-quantum
-  - horovod[tensorflow,keras,pytorch]
   - line_profiler
   - memory_profiler
   - jupyterlab-nvdashboard
+  - git+https://github.com/horovod/horovod.git@master
