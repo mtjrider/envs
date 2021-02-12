@@ -12,11 +12,11 @@ create_dev_env() {
     conda env remove --name dev
     if [[ ${TARGET_OS} = "macOS" ]]
     then
-        COMMAND="HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 CC=${CC} CXX=${CXX} conda env create --name dev --file ${DIR}/conda/environments/dev-macos.yml"
+        COMMAND="CC=${CC} CXX=${CXX} conda env create --name dev --file ${DIR}/conda/environments/dev-macos.yml"
         bash -c "echo ${COMMAND} && ${COMMAND}"
     elif [[ ${TARGET_OS} = "linux" ]]
     then
-        COMMAND="CC=${CC} CXX=${CXX} conda env create --name dev --file ${DIR}/conda/environments/dev-linux.yml"
+        COMMAND="HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 CC=${CC} CXX=${CXX} conda env create --name dev --file ${DIR}/conda/environments/dev-linux.yml"
         bash -c "echo ${COMMAND} && ${COMMAND}"
         conda activate dev && jupyter labextension install jupyterlab-nvdashboard
     else
