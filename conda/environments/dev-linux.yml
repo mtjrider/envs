@@ -8,8 +8,7 @@ dependencies:
 - numpy
 - scipy
 - numba
-- openmpi=3.1.*
-- nccl=2.7.8
+- nccl
 - cudnn=8.*
 - cudatoolkit=11.0
 - pytorch
@@ -22,6 +21,7 @@ dependencies:
 - jupyterlab=2.*
 - nodejs
 - jedi=0.17.*
+- openmpi=3.1.*
 - pip
 - pip:
   - sparse
@@ -29,8 +29,9 @@ dependencies:
   - cirq
   - qsimcirq
   - cirq[contrib]
-  - tensorflow-gpu==2.3.1
-  - tensorflow-quantum`
+  - tensorflow-gpu
+  - tensorflow-quantum
+  - horovod[tensorflow,keras,pytorch]
   - line_profiler
   - memory_profiler
   - jupyterlab-nvdashboard
