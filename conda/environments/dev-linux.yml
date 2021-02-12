@@ -8,7 +8,7 @@ dependencies:
 - numpy
 - scipy
 - numba
-- nccl=2.4.*
+- nccl
 - cudnn=8.*
 - cudatoolkit=11.0
 - pytorch
@@ -30,7 +30,7 @@ dependencies:
   - cirq[contrib]
   - tensorflow-gpu
   - tensorflow-quantum
-  - horovod[tensorflow, pytorch]
+  - git+https://github.com/horovod/horovod.git@v0.21.2
   - line_profiler
   - memory_profiler
   - jupyterlab-nvdashboard
