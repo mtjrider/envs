@@ -30,8 +30,7 @@ dependencies:
   - qsimcirq
   - cirq[contrib]
   - tensorflow-gpu==2.3.1
-  - tensorflow-quantum
-  - horovod[tensorflow,keras,pytorch]==0.20.0
+  - tensorflow-quantum`
   - line_profiler
   - memory_profiler
   - jupyterlab-nvdashboard
