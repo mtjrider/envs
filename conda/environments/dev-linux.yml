@@ -8,6 +8,7 @@ dependencies:
 - numpy
 - scipy
 - numba
+- openmpi=3.1.*
 - nccl=2.7.8
 - cudnn=8.*
 - cudatoolkit=11.0
