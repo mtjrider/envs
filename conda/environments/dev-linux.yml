@@ -4,15 +4,14 @@ channels:
 - conda-forge
 dependencies:  
 - cmake
-- cxx-compiler=1.0
 - sympy
 - numpy
 - scipy
+- munch
 - numba
 - nccl
 - cudnn=8.*
 - cudatoolkit=11.0
-- nvcc_linux-64
 - pytorch
 - torchaudio
 - torchvision

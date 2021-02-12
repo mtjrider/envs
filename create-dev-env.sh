@@ -20,8 +20,7 @@ create_dev_env() {
         COMMAND="CC=${CC} CXX=${CXX} conda env create --name dev --file ${DIR}/conda/environments/dev-linux.yml"
         bash -c "echo ${COMMAND} && ${COMMAND}"
         conda activate dev && \
-            jupyter labextension install jupyterlab-nvdashboard && \
-            HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_GPU_OPERATIONS=NCCL pip install git+https://github.com/horovod/horovod.git@v0.21.2
+            jupyter labextension install jupyterlab-nvdashboard
     else
         exit 1
     fi
