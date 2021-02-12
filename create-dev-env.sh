@@ -13,7 +13,7 @@ create_dev_env() {
     if [[ ${TARGET_OS} = "macOS" ]]
     then
         COMMAND="CC=${CC} CXX=${CXX} conda env create --name dev --file ${DIR}/conda/environments/dev-macos.yml"
-        bash -c "echo ${COMMAND} && ${COMMAND}"
+        bash -c "echo ${COMMAND} && HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 ${COMMAND}"
     elif [[ ${TARGET_OS} = "linux" ]]
     then
         COMMAND="CC=${CC} CXX=${CXX} conda env create --name dev --file ${DIR}/conda/environments/dev-linux.yml"
