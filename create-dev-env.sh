@@ -9,6 +9,7 @@ CONDA=$4
 source ${CONDA}/etc/profile.d/conda.sh
 
 create_dev_env() {
+    conda deactivate
     conda env remove --name dev
     if [[ ${TARGET_OS} = "macOS" ]]
     then
