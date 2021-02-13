@@ -9,22 +9,24 @@ PREFIX=$2
 install_conda() {
     if [[ $TARGET_OS = "macOS" ]]
     then
-	echo $CONDA_MACOS
-	curl --insecure $CONDA_MACOS -o $PREFIX/miniconda.sh
-	bash $PREFIX/miniconda.sh -b -p $PREFIX/conda && \
-            $PREFIX/conda/bin/conda init && source $PREFIX/conda/etc/profile.d/conda.sh && \
-            conda update --name base conda --yes && \
-            rm -f $PREFIX/miniconda.sh	
+        echo $CONDA_MACOS
+        curl --insecure $CONDA_MACOS -o $PREFIX/miniconda.sh
+        bash $PREFIX/miniconda.sh -b -p $PREFIX/conda && \
+                $PREFIX/conda/bin/conda init && source $PREFIX/conda/etc/profile.d/conda.sh && \
+                conda update --name base conda --yes && \
+                rm -f $PREFIX/miniconda.sh	
     elif [[ $TARGET_OS = "linux" ]]
     then
-	echo $CONDA_LINUX
-	curl --insecure $CONDA_LINUX -o $PREFIX/miniconda.sh
-	bash $PREFIX/miniconda.sh -b -p $PREFIX/conda && \
-            $PREFIX/conda/bin/conda init && source $PREFIX/conda/etc/profile.d/conda.sh && \
-            conda update --name base conda --yes && \
-            rm -f $PREFIX/miniconda.sh	
+        echo $CONDA_LINUX
+        curl --insecure $CONDA_LINUX -o $PREFIX/miniconda.sh
+        bash $PREFIX/miniconda.sh -b -p $PREFIX/conda && \
+                $PREFIX/conda/bin/conda init && source $PREFIX/conda/etc/profile.d/conda.sh && \
+                conda update --name base conda --yes && \
+                rm -f $PREFIX/miniconda.sh	
     else
-	    exit -1
+        echo "install_conda: invalid target os"
+        echo "install_conda: target os must be either 'macOS' or 'linux'"
+	    exit 1
     fi
 }
 
