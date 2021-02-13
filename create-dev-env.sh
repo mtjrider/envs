@@ -14,22 +14,25 @@ create_dev_env() {
     then
         COMMAND="CC=${CC} CXX=${CXX} conda env create --name dev --file ${DIR}/conda/environments/dev-macos.yml"
         echo ${COMMAND}
-        ${COMMAND}
+        bash -c "${COMMAND}"
     elif [[ ${TARGET_OS} = "linux" ]]
     then
-        COMMAND="CC=${CC} CXX=${CXX} conda env create --name dev --file ${DIR}/conda/environments/dev-linux.yml"
-        echo ${COMMAND}
-        ${COMMAND}
+        QSIM_FLAGS="CC=${CC} CXX=${CXX}"
+        COMMAND="conda env create --name dev --file ${DIR}/conda/environments/dev-linux.yml"
+        echo "${QSIM_FLAGS} ${COMMAND}"
+        bash -c "${QSIM_FLAGS} ${COMMAND}"
         echo ""
         echo "installing jupyter lab exentions and additional pip dependencies"
         echo ""
+        HOROVOD_FLAGS="HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_GPU=CUDA HOROVOD_GPU_OPERATIONS=NCCL"
         COMMAND="conda activate dev && \
             jupyter labextension install jupyterlab-nvdashboard && \
             pip install --no-cache-dir git+https://github.com/horovod/horovod.git@v0.21.2"
-        COMMAND="HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_GPU=CUDA HOROVOD_GPU_OPERATIONS=NCCL ${COMMAND}"
-        echo ${COMMAND}
-        ${COMMAND}
+        echo "${HOROVOD_FLAGS} ${COMMAND}"
+        bash -c "${HOROVOD_FLAGS} ${COMMAND}"
     else
+        echo "create_dev: invalid target os"
+        echo "create_dev: target os must be either 'macOS' or 'linux'"
         exit 1
     fi
 }
