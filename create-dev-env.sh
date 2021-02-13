@@ -16,7 +16,7 @@ create_dev_env() {
     then
         COMMAND="CC=${CC} CXX=${CXX} conda env create --name dev --file ${DIR}/conda/environments/dev-macos.yml"
         echo ${COMMAND}
-        bash ${COMMAND}
+        bash -c "${COMMAND}"
     elif [[ ${TARGET_OS} = "linux" ]]
     then
         COMMAND="CC=${CC} CXX=${CXX} conda env create --name dev --file ${DIR}/conda/environments/dev-linux.yml"
@@ -30,7 +30,7 @@ create_dev_env() {
             pip install --no-cache-dir git+https://github.com/horovod/horovod.git@v0.21.2"
         COMMAND="HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_GPU=CUDA HOROVOD_GPU_OPERATIONS=NCCL ${COMMAND}"
         echo ${COMMAND}
-        bash ${COMMAND}
+        bash -c "${COMMAND}"
     else
         exit 1
     fi
