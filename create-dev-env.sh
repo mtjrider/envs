@@ -10,6 +10,7 @@ source ${CONDA}/etc/profile.d/conda.sh
 
 create_dev_env() {
     conda deactivate
+    conda clean --all --yes
     conda env remove --name dev
     if [[ ${TARGET_OS} = "macOS" ]]
     then
@@ -26,8 +27,8 @@ create_dev_env() {
         echo ""
         COMMAND="conda activate dev && \
             jupyter labextension install jupyterlab-nvdashboard && \
-            pip install git+https://github.com/horovod/horovod.git@v0.21.2"
-        COMMAND="HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_GPU_OPERATIONS=NCCL ${COMMAND}"
+            pip install --no-cache-dir git+https://github.com/horovod/horovod.git@v0.21.2"
+        COMMAND="HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_GPU=CUDA HOROVOD_GPU_OPERATIONS=NCCL ${COMMAND}"
         echo ${COMMAND}
         ${COMMAND}
     else
