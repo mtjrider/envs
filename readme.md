@@ -13,14 +13,12 @@
 
 ---
 
-`bash create-dev-env.sh TARGET_OS CC CXX CONDA`
+`bash create-dev-env.sh TARGET_OS CONDA [CLEAR_CACHE]`
 
 ---
 
 ## `create-dev-env.sh` positional arguments
 
 1. `TARGET_OS`: one of `[linux, macOS]`; specify which Anaconda environmetnt specification file to use under `conda/environments`.
-2. `CC`: the path to a valid C compiler for building `quantumlib/qsim`.
-3. `CXX`: the path to a valid C++ compiler for building `quantumlib/qsim`.
-4. `CONDA`: the path to the `conda` root directory; (ex.) `PATH/conda`.
-
+2. `CONDA`: the path to the `conda` root directory; (ex.) `PATH/conda`.
+3. `CLEAR_CACHE`: one of `[0, 1]`; boolean optional argument specifying whether or not to clear the `conda` cache (default is `0`).
