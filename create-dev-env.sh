@@ -12,7 +12,7 @@ create_dev_env() {
     then
         conda clean --all --yes
     fi
-    bash -c "source ${CONDA} && conda env remove --name dev"
+    bash -c "source ${CONDA} && conda deactivate && conda env remove --name dev"
     if [[ ${TARGET_OS} = "macOS" ]]
     then
         COMMAND="conda env create --name dev --file ${DIR}/conda/environments/dev-macos.yml"
