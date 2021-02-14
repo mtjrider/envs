@@ -8,12 +8,11 @@ CLEAR_CACHE=$3
 CONDA="${CONDA}/etc/profile.d/conda.sh"
 
 create_dev_env() {
-    bash -c "source ${CONDA} && conda deactivate"
     if [[ ${CLEAR_CACHE} != "" ]]
     then
         conda clean --all --yes
     fi
-    conda env remove --name dev
+    bash -c "source ${CONDA} && conda env remove --name dev"
     if [[ ${TARGET_OS} = "macOS" ]]
     then
         COMMAND="conda env create --name dev --file ${DIR}/conda/environments/dev-macos.yml"
