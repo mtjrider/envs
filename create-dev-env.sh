@@ -10,7 +10,10 @@ CONDA="${CONDA}/etc/profile.d/conda.sh"
 create_dev_env() {
     if [[ ${CLEAR_CACHE} != "" ]]
     then
-        bash -c "source ${CONDA} && conda clean --all --yes"
+        if [[ ${CLEAR_CACHE} -gt 0 ]]
+        then
+            bash -c "source ${CONDA} && conda clean --all --yes"
+        fi
     fi
     bash -c "source ${CONDA} && conda deactivate && conda env remove --name dev"
     if [[ ${TARGET_OS} = "macOS" ]]
