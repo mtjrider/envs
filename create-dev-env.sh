@@ -8,7 +8,7 @@ CLEAR_CACHE=$3
 CONDA="${CONDA}/etc/profile.d/conda.sh"
 
 create_dev_env() {
-    conda deactivate
+    bash -c "source ${CONDA} && conda deactivate"
     if [[ ${CLEAR_CACHE} != "" ]]
     then
         conda clean --all --yes
