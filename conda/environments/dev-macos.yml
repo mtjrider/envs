@@ -3,10 +3,12 @@ channels:
 - pytorch
 - conda-forge
 dependencies:
+- clangxx_osx-64
 - cmake
 - sympy
 - numpy
 - scipy
+- munch
 - numba
 - pytorch
 - torchaudio
@@ -18,6 +20,7 @@ dependencies:
 - jupyterlab=2.*
 - nodejs
 - jedi=0.17.*
+- mpi4py
 - pip
 - pip:
   - sparse
@@ -25,7 +28,9 @@ dependencies:
   - cirq
   - qsimcirq
   - cirq[contrib]
+  - tensorboard
   - tensorflow
   - tensorflow-quantum
   - line_profiler
   - memory_profiler
+  - jupyterlab-nvdashboard
