@@ -31,8 +31,8 @@ create_dev_env() {
         echo ""
         COMMAND="conda activate dev && \
             jupyter labextension install jupyterlab-nvdashboard && \
-            pip install --no-cache-dir horovod[tensorflow,keras,pytorch]"
-        echo "${HOROVOD_FLAGS_MACOS} ${COMMAND}"
+            ${HOROVOD_FLAGS_MACOS} pip install --no-cache-dir git+https://github.com/horovod/horovod.git@v0.21.2"
+        echo "${COMMAND}"
         bash -c "${SOURCE_CONDA} && ${HOROVOD_FLAGS_MACOS} ${COMMAND}"
     elif [[ ${TARGET_OS} = "linux" ]]
     then
@@ -44,9 +44,9 @@ create_dev_env() {
         echo ""
         COMMAND="conda activate dev && \
             jupyter labextension install jupyterlab-nvdashboard && \
-            pip install --no-cache-dir git+https://github.com/horovod/horovod.git@v0.21.2"
+            ${HOROVOD_FLAGS_LINUX} pip install --no-cache-dir git+https://github.com/horovod/horovod.git@v0.21.2"
         echo "${HOROVOD_FLAGS_LINUX} ${COMMAND}"
-        bash -c "${SOURCE_CONDA} && ${HOROVOD_FLAGS_LINUX} ${COMMAND}"
+        bash -c "${SOURCE_CONDA} && ${COMMAND}"
     else
         echo "create_dev: invalid target os"
         echo "create_dev: target os must be either 'macOS' or 'linux'"
