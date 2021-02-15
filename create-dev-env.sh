@@ -44,7 +44,7 @@ create_dev_env() {
         echo ""
         COMMAND="conda activate dev && \
             jupyter labextension install jupyterlab-nvdashboard && \
-            pip install --no-cache-dir horovod[tensorflow,keras,pytorch]"
+            pip install --no-cache-dir horovod[tensorflow-gpu,keras,pytorch]"
         echo "${HOROVOD_FLAGS_LINUX} ${COMMAND}"
         bash -c "${SOURCE_CONDA} && ${HOROVOD_FLAGS_LINUX} ${COMMAND}"
     else
