@@ -21,4 +21,4 @@
 
 1. `TARGET_OS`: one of `[linux, macOS]`; specify which Anaconda environmetnt specification file to use under `conda/environments`.
 2. `CONDA`: the path to the `conda` root directory; (ex.) `PATH/conda`.
-3. `CLEAR_CACHE`: one of `[0, 1]`; boolean optional argument specifying whether or not to clear the `conda` cache (default is `0`).
+3. `CLEAR_CACHE`: one of `[0, 1]`; optional boolean argument specifying whether or not to clear the `conda` cache (default is `0`).
