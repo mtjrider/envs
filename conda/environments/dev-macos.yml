@@ -33,4 +33,5 @@ dependencies:
   - tensorflow-quantum
   - line_profiler
   - memory_profiler
+  - jupyter-tensorboard
   - jupyterlab-nvdashboard
