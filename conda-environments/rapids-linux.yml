@@ -1,39 +1,24 @@
-name: dev
+name: rapids
 channels:
-- pytorch
+- rapidsai
+- nvidia
 - conda-forge
 dependencies:  
-- gxx_linux-64=7.5.*
-- cmake
-- sympy
 - numpy
-- scipy
-- munch
 - numba
 - nccl
 - cudnn=8.*
 - cudatoolkit=11.0
-- pytorch
-- torchaudio
-- torchvision
-- torchaudio
-- opt_einsum
 - python=3.7
+- rapids-blazing=0.17
 - matplotlib
 - jupyterlab=2.*
 - nodejs
 - jedi=0.17.*
 - mpi4py
+- s3fs
 - pip
 - pip:
-  - sparse
-  - ray[all]
-  - cirq
-  - qsimcirq
-  - cirq[contrib]
-  - tensorboard
-  - tensorflow-gpu
-  - tensorflow-quantum
   - line_profiler
   - memory_profiler
   - jupyter-tensorboard

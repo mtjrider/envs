@@ -2,23 +2,19 @@
 
 ---
 
-`bash install-conda.sh TARGET_OS PREFIX`
+`make install.rapids`
+
+Installs conda, and the builds a conda environment called `rapids` with packages specified by `conda-environments/rapids-linux.yml`
+Note: this only works on supported linux distributions
 
 ---
 
-## `install-conda.sh` positional options
+`make install.linux.dev`
 
-1. `TARGET_OS`: one of `[linux, macOS]`; specify which script to pull from Anaconda for installation.
-2. `PREFIX`: the installation prefix for conda; `PATH` would install `conda` under `PATH/conda`.
-
----
-
-`bash create-dev-env.sh TARGET_OS CONDA [CLEAR_CACHE]`
+Installs conda, and the builds a conda environment called `dev` with packages specified by `conda-environments/dev-linux.yml`
 
 ---
 
-## `create-dev-env.sh` positional arguments
+`make install.macos.dev`
 
-1. `TARGET_OS`: one of `[linux, macOS]`; specify which Anaconda environmetnt specification file to use under `conda/environments`.
-2. `CONDA`: the path to the `conda` root directory; (ex.) `PATH/conda`.
-3. `CLEAR_CACHE`: one of `[0, 1]`; optional boolean argument specifying whether or not to clear the `conda` cache (default is `0`).
+Installs conda, and the builds a conda environment called `dev` with packages specified by `conda-environments/dev-macos.yml`

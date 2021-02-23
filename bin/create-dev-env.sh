@@ -23,7 +23,7 @@ create_dev_env() {
         COMMAND="brew reinstall libuv"  # https://horovod.readthedocs.io/en/stable/install_include.html#gloo
         echo "${COMMAND}"
         bash -c "${COMMAND}"
-        COMMAND="conda env create --name dev --file ${DIR}/conda/environments/dev-macos.yml"
+        COMMAND="conda env create --name dev --file ${DIR}/../conda-environments/dev-macos.yml"
         echo "${COMMAND}"
         bash -c "${SOURCE_CONDA} && ${COMMAND}"
         echo ""
@@ -36,7 +36,7 @@ create_dev_env() {
         bash -c "${SOURCE_CONDA} && ${HOROVOD_FLAGS_MACOS} ${COMMAND}"
     elif [[ ${TARGET_OS} = "linux" ]]
     then
-        COMMAND="conda env create --name dev --file ${DIR}/conda/environments/dev-linux.yml"
+        COMMAND="conda env create --name dev --file ${DIR}/../conda-environments/dev-linux.yml"
         echo "${COMMAND}"
         bash -c "${SOURCE_CONDA} && ${COMMAND}"
         echo ""
@@ -48,8 +48,8 @@ create_dev_env() {
         echo "${HOROVOD_FLAGS_LINUX} ${COMMAND}"
         bash -c "${SOURCE_CONDA} && ${COMMAND}"
     else
-        echo "create_dev: invalid target os"
-        echo "create_dev: target os must be either 'macOS' or 'linux'"
+        echo "create_dev_env: invalid target os"
+        echo "create_dev_env: target os must be either 'macOS' or 'linux'"
         exit 1
     fi
 }
