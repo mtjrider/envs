@@ -17,7 +17,7 @@ create_rapids_env() {
     fi
     if [[ ${DETECTED_OS} = "linux" ]]
     then
-        bash -c "${SOURCE_CONDA} && conda deactivate && conda env remove --name dev"
+        bash -c "${SOURCE_CONDA} && conda deactivate && conda env remove --name rapids"
         COMMAND="conda env create --name rapids --file ${DIR}/../conda-environments/rapids-linux.yml"
         echo "${COMMAND}"
         bash -c "${SOURCE_CONDA} && ${COMMAND}"
