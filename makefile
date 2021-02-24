@@ -6,6 +6,8 @@
 .PHONY: install.conda.macos
 .PHONY: install.conda.linux.env.dev
 .PHONY: install.conda.macos.env.dev
+.PHONY: reinstall.conda.linux
+.PHONY: reinstall.conda.macos
 
 install.linux.dev: install.conda.linux
 install.linux.dev: install.conda.linux.env.dev
@@ -30,3 +32,9 @@ install.conda.macos.env.dev:
 
 install.conda.linux.env.rapids:
 	bash bin/create-rapids-env.sh ./conda 1
+
+reinstall.conda.linux:
+	bash bin/install-conda.sh linux . 1
+
+reinstall.conda.macos:
+	bash bin/install-conda.sh macOS . 1

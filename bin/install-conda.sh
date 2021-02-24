@@ -5,6 +5,7 @@ CONDA_MACOS=https://repo.anaconda.com/miniconda/Miniconda3-latest-MacOSX-x86_64.
 
 TARGET_OS=$1
 PREFIX=$2
+REINSTALL=$3
 
 DETECTED_OS=$(echo $(uname) | tr '[:upper:]' '[:lower:]')
 
@@ -24,13 +25,48 @@ check_os() {
     fi
 }
 
+check_conda() {
+    local PREFIX=$1
+    local REINSTALL=$2
+    if [[ -d "${PREFIX}/conda" ]]
+    then
+        echo ""
+        echo "check_conda: detected conda"
+        echo ""
+        if [[ ${REINSTALL} != "" ]]
+        then
+            if [[ ${REINSTALL} -gt 0 ]]
+            then
+                COMMAND="rm -rf ${PREFIX}/conda"
+                echo "check_conda: not using detected conda installation"
+                echo "check_conda: executing conda installation"
+                echo "check_conda: running '${COMMAND}'"
+                echo ""
+                bash -c "${COMMAND}"
+            else
+                echo "check_conda: using detected conda installation"
+                echo "check_conda: skipping conda installation"
+                echo ""
+                exit 0
+            fi
+        else
+            echo "check_conda: reinstallation flag not detected"
+            echo "check_conda: using detected conda installation"
+            echo "check_conda: skipping conda installation"
+            echo ""
+            exit 0        
+        fi
+    fi
+}
+
 install_conda() {
     check_os ${TARGET_OS} ${DETECTED_OS}
+    check_conda ${PREFIX} ${REINSTALL}
     if [[ ${TARGET_OS} = "macOS" ]]
     then
         echo ${CONDA_MACOS}
         curl --insecure ${CONDA_MACOS} -o ${PREFIX}/miniconda.sh
-        bash ${PREFIX}/miniconda.sh -b -u -p ${PREFIX}/conda && \
+        bash ${PREFIX}/miniconda.sh -b -p ${PREFIX}/conda && \
                 ${PREFIX}/conda/bin/conda init && source ${PREFIX}/conda/etc/profile.d/conda.sh && \
                 conda update --name base conda --yes && \
                 rm -f ${PREFIX}/miniconda.sh
@@ -38,7 +74,7 @@ install_conda() {
     then
         echo ${CONDA_LINUX}
         curl --insecure ${CONDA_LINUX} -o ${PREFIX}/miniconda.sh
-        bash ${PREFIX}/miniconda.sh -b -u -p ${PREFIX}/conda && \
+        bash ${PREFIX}/miniconda.sh -b -p ${PREFIX}/conda && \
                 ${PREFIX}/conda/bin/conda init && source ${PREFIX}/conda/etc/profile.d/conda.sh && \
                 conda update --name base conda --yes && \
                 rm -f ${PREFIX}/miniconda.sh	

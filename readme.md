@@ -5,7 +5,8 @@
 `make install.rapids`
 
 Installs conda, and the builds a conda environment called `rapids` with packages specified by `conda-environments/rapids-linux.yml`
-Note: this only works on supported linux distributions
+
+Note: this only works on a linux distribution
 
 ---
 
