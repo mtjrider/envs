@@ -23,7 +23,7 @@ create_rapids_env() {
         echo ""
         echo "installing jupyter lab exentions and additional pip dependencies"
         echo ""
-        COMMAND="conda activate dev && \
+        COMMAND="conda activate rapids && \
             jupyter labextension install jupyterlab-nvdashboard"
         echo "${HOROVOD_FLAGS_LINUX} ${COMMAND}"
         bash -c "${SOURCE_CONDA} && ${COMMAND}"
