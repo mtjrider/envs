@@ -3,7 +3,8 @@ channels:
 - rapidsai
 - nvidia
 - conda-forge
-dependencies:  
+dependencies:
+- nb_conda_kernels
 - numpy
 - numba
 - nccl

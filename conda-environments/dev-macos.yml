@@ -4,6 +4,7 @@ channels:
 - conda-forge
 dependencies:
 - clangxx_osx-64
+- nb_conda_kernels
 - cmake
 - sympy
 - numpy
