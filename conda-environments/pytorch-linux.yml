@@ -1,0 +1,38 @@
+name: dev
+channels:
+- rapidsai
+- nvidia
+- pytorch
+- conda-forge
+dependencies:  
+- gxx_linux-64=7.5.*
+- nb_conda_kernels
+- cmake
+- sympy
+- numpy
+- scipy
+- munch
+- numba
+- nccl
+- cudnn=8.*
+- cudatoolkit=11.0
+- pytorch
+- torchaudio
+- torchvision
+- opt_einsum
+- python=3.7
+- rapids-blazing=0.17
+- matplotlib
+- jupyterlab=2.*
+- nodejs
+- jedi=0.17.*
+- mpi4py
+- s3fs
+- pip
+- pip:
+  - sparse
+  - ray[all]
+  - line_profiler
+  - memory_profiler
+  - jupyter-tensorboard
+  - jupyterlab-nvdashboard
