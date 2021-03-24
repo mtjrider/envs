@@ -7,7 +7,7 @@ CLEAR_CACHE=$3
 
 SOURCE_CONDA="source ${CONDA}/etc/profile.d/conda.sh"
 HOROVOD_FLAGS_MACOS="HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_WITH_GLOO=1"
-HOROVOD_FLAGS_LINUX="HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_GPU=CUDA HOROVOD_GPU_OPERATIONS=NCCL"
+HOROVOD_FLAGS_LINUX="HOROVOD_WITHOUT_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_GPU=CUDA HOROVOD_GPU_OPERATIONS=NCCL"
 
 create_dev_env() {
     if [[ ${CLEAR_CACHE} != "" ]]
@@ -31,7 +31,7 @@ create_dev_env() {
         echo ""
         COMMAND="conda activate dev && \
             jupyter labextension install jupyterlab-nvdashboard && \
-            ${HOROVOD_FLAGS_MACOS} pip install --no-cache-dir git+https://github.com/horovod/horovod.git@v0.21.2"
+            ${HOROVOD_FLAGS_MACOS} pip install --no-cache-dir git+https://github.com/horovod/horovod.git@v0.21.3"
         echo "${COMMAND}"
         bash -c "${SOURCE_CONDA} && ${HOROVOD_FLAGS_MACOS} ${COMMAND}"
     elif [[ ${TARGET_OS} = "linux" ]]
@@ -44,7 +44,7 @@ create_dev_env() {
         echo ""
         COMMAND="conda activate dev && \
             jupyter labextension install jupyterlab-nvdashboard && \
-            ${HOROVOD_FLAGS_LINUX} pip install --no-cache-dir git+https://github.com/horovod/horovod.git@v0.21.2"
+            ${HOROVOD_FLAGS_LINUX} pip install --no-cache-dir git+https://github.com/horovod/horovod.git@v0.21.3"
         echo "${HOROVOD_FLAGS_LINUX} ${COMMAND}"
         bash -c "${SOURCE_CONDA} && ${COMMAND}"
     else
