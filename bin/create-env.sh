@@ -8,10 +8,13 @@ CONDA_ENV_NAME=$4
 CONDA_ENV_YML=$5
 
 SOURCE_CONDA="source ${CONDA}/etc/profile.d/conda.sh"
+
 HOROVOD_FLAGS_MACOS="HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_WITH_GLOO=1"
-PYTORCH_HOROVOD_FLAGS_LINUX="HOROVOD_WITHOUT_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_GPU=CUDA HOROVOD_GPU_OPERATIONS=NCCL"
-TENSORFLOW_HOROVOD_FLAGS_LINUX="HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITHOUT_PYTORCH=1 HOROVOD_GPU=CUDA HOROVOD_GPU_OPERATIONS=NCCL"
-DEV_HOROVOD_FLAGS_LINUX="HOROVOD_WITHOUT_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_GPU=CUDA HOROVOD_GPU_OPERATIONS=NCCL"
+
+HOROVOD_BUILD_CUDA_CC_LIST=70,75,80
+PYTORCH_HOROVOD_FLAGS_LINUX="HOROVOD_WITHOUT_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_GPU=CUDA HOROVOD_BUILD_CUDA_CC_LIST=${HOROVOD_BUILD_CUDA_CC_LIST} HOROVOD_GPU_OPERATIONS=NCCL HOROVOD_NCCL_LINK=SHARED"
+DEV_HOROVOD_FLAGS_LINUX="HOROVOD_WITHOUT_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_GPU=CUDA HOROVOD_BUILD_CUDA_CC_LIST=${HOROVOD_BUILD_CUDA_CC_LIST} HOROVOD_GPU_OPERATIONS=NCCL HOROVOD_NCCL_LINK=SHARED"
+
 HOROVOD_GIT="https://github.com/horovod/horovod.git@v0.21.3"
 
 create_env() {
@@ -53,8 +56,7 @@ create_env() {
             bash -c "${SOURCE_CONDA} && conda deactivate && conda env remove --name tensorflow"
             CONDA_ENV_CREATE_COMMAND="conda env create --name tensorflow --file ${DIR}/../conda-environments/tensorflow-linux.yml"
             ADDITIONAL_PIP_COMMAND="conda activate tensorflow && \
-                jupyter labextension install jupyterlab-nvdashboard && \
-                ${TENSORFLOW_HOROVOD_FLAGS_LINUX} pip install --no-cache-dir git+${HOROVOD_GIT}"
+                jupyter labextension install jupyterlab-nvdashboard"
         elif [[ ${CONDA_ENV_NAME} = "dev" ]]
         then
             bash -c "${SOURCE_CONDA} && conda deactivate && conda env remove --name dev"
@@ -88,4 +90,4 @@ create_env() {
     fi
 }
 
-create_env
+create_env && ${SOURCE_CONDA}
