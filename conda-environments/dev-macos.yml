@@ -24,6 +24,7 @@ dependencies:
 - mpi4py
 - pip
 - pip:
+  - filterpy
   - sparse
   - ray[all]
   - cirq
