@@ -57,7 +57,7 @@ install.conda.linux.env.dev:
 	bash bin/create-env.sh linux ./conda 1 dev dev-linux.yml
 
 install.conda.linux.env.rapids:
-	bash bin/create-rapids-env.sh ./conda 1 rapids rapids-linux.yml
+	bash bin/create-env.sh ./conda 1 rapids rapids-linux.yml
 
 install.conda.macos.env.dev:
 	bash bin/create-env.sh macOS ./conda 1
