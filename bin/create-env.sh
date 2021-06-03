@@ -55,6 +55,8 @@ create_env() {
         then
             bash -c "${SOURCE_CONDA} && conda deactivate && conda env remove --name tensorflow"
             CONDA_ENV_CREATE_COMMAND="conda env create --name tensorflow --file ${DIR}/../conda-environments/tensorflow-linux.yml"
+            ADDITIONAL_PIP_COMMAND="conda activate tensorflow && \
+                echo 'none needed, skipping' "
         elif [[ ${CONDA_ENV_NAME} = "dev" ]]
         then
             bash -c "${SOURCE_CONDA} && conda deactivate && conda env remove --name dev"
@@ -80,7 +82,7 @@ create_env() {
         echo "installing jupyter lab exentions and additional pip dependencies"
         echo ""
         echo "${HOROVOD_FLAGS_LINUX} ${ADDITIONAL_PIP_COMMAND}"
-        bash -c "${SOURCE_CONDA} && ${ADDITIONAL_PIP_COMMAND}"
+        bash -c "${SOURCE_CONDA} && ${ADDITIONAL_PIP_COMMAND} && echo 'installation successful' "
     else
         echo "create_env: invalid target os"
         echo "create_env: target os must be either 'macOS' or 'linux'"
