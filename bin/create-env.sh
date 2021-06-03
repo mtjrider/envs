@@ -55,8 +55,6 @@ create_env() {
         then
             bash -c "${SOURCE_CONDA} && conda deactivate && conda env remove --name tensorflow"
             CONDA_ENV_CREATE_COMMAND="conda env create --name tensorflow --file ${DIR}/../conda-environments/tensorflow-linux.yml"
-            ADDITIONAL_PIP_COMMAND="conda activate tensorflow && \
-                jupyter labextension install jupyterlab-nvdashboard"
         elif [[ ${CONDA_ENV_NAME} = "dev" ]]
         then
             bash -c "${SOURCE_CONDA} && conda deactivate && conda env remove --name dev"
