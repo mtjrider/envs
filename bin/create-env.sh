@@ -82,7 +82,7 @@ create_env() {
         echo "installing jupyter lab exentions and additional pip dependencies"
         echo ""
         echo "${HOROVOD_FLAGS_LINUX} ${ADDITIONAL_PIP_COMMAND}"
-        bash -c "${SOURCE_CONDA} && ${ADDITIONAL_PIP_COMMAND} && echo 'installation successful' "
+        bash -c "${SOURCE_CONDA} && ${ADDITIONAL_PIP_COMMAND}" && echo "installation successful"
     else
         echo "create_env: invalid target os"
         echo "create_env: target os must be either 'macOS' or 'linux'"
