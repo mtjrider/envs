@@ -49,7 +49,6 @@ create_env() {
             bash -c "${SOURCE_CONDA} && conda deactivate && conda env remove --name pytorch"
             CONDA_ENV_CREATE_COMMAND="conda env create --name pytorch --file ${DIR}/../conda-environments/pytorch-linux.yml"
             ADDITIONAL_PIP_COMMAND="conda activate pytorch && \
-                jupyter labextension install jupyterlab-nvdashboard && \
                 ${PYTORCH_HOROVOD_FLAGS_LINUX} pip install --no-cache-dir git+${HOROVOD_GIT}"
         elif [[ ${CONDA_ENV_NAME} = "tensorflow" ]]
         then
@@ -62,14 +61,13 @@ create_env() {
             bash -c "${SOURCE_CONDA} && conda deactivate && conda env remove --name dev"
             CONDA_ENV_CREATE_COMMAND="conda env create --name dev --file ${DIR}/../conda-environments/dev-linux.yml"
             ADDITIONAL_PIP_COMMAND="conda activate dev && \
-                jupyter labextension install jupyterlab-nvdashboard && \
                 ${DEV_HOROVOD_FLAGS_LINUX} pip install --no-cache-dir git+${HOROVOD_GIT}"
         elif [[ ${CONDA_ENV_NAME} = "rapids" ]]
         then
             bash -c "${SOURCE_CONDA} && conda deactivate && conda env remove --name rapids"
             CONDA_ENV_CREATE_COMMAND="conda env create --name rapids --file ${DIR}/../conda-environments/rapids-linux.yml"
             ADDITIONAL_PIP_COMMAND="conda activate rapids && \
-                jupyter labextension install jupyterlab-nvdashboard"
+                echo 'none needed, skipping' "
         else
             echo "create_env: invalid environment name"
             echo "create_env: environment name must be one of 'pytorch', 'tensorflow', 'dev'"
@@ -79,7 +77,7 @@ create_env() {
         echo "${CONDA_ENV_CREATE_COMMAND}"
         bash -c "${SOURCE_CONDA} && ${CONDA_ENV_CREATE_COMMAND}"
         echo ""
-        echo "installing jupyter lab exentions and additional pip dependencies"
+        echo "installing additional jupyter lab exentions and pip dependencies (if necessary)"
         echo ""
         echo "${HOROVOD_FLAGS_LINUX} ${ADDITIONAL_PIP_COMMAND}"
         bash -c "${SOURCE_CONDA} && ${ADDITIONAL_PIP_COMMAND}" && echo "installation successful"

@@ -17,11 +17,11 @@ dependencies:
 - cudatoolkit=11.0
 - opt_einsum
 - python=3.7
-- rapids-blazing=0.17
+- rapids-blazing=0.19
 - matplotlib
 - jupyterlab=2.*
 - nodejs
-- jedi=0.17.*
+- jedi
 - mpi4py
 - s3fs
 - pip
@@ -34,6 +34,7 @@ dependencies:
   - tensorboard
   - tensorflow-gpu
   - tensorflow-quantum
+  - tensorflow-probability
   - line_profiler
   - memory_profiler
   - jupyter-tensorboard

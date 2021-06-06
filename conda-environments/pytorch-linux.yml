@@ -21,11 +21,11 @@ dependencies:
 - torchvision
 - opt_einsum
 - python=3.7
-- rapids-blazing=0.17
+- rapids-blazing=0.19
 - matplotlib
-- jupyterlab=2.*
+- jupyterlab
 - nodejs
-- jedi=0.17.*
+- jedi
 - mpi4py
 - s3fs
 - pip
@@ -34,4 +34,3 @@ dependencies:
   - ray[all]
   - line_profiler
   - memory_profiler
-  - jupyterlab-nvdashboard

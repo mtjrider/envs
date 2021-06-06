@@ -18,9 +18,9 @@ dependencies:
 - opt_einsum
 - python=3.7
 - matplotlib
-- jupyterlab=2.*
+- jupyterlab
 - nodejs
-- jedi=0.17.*
+- jedi
 - mpi4py
 - pip
 - pip:
@@ -36,4 +36,3 @@ dependencies:
   - line_profiler
   - memory_profiler
   - jupyter-tensorboard
-  - jupyterlab-nvdashboard

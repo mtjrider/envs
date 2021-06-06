@@ -11,15 +11,14 @@ dependencies:
 - cudnn=8.*
 - cudatoolkit=11.0
 - python=3.7
-- rapids-blazing=0.17
+- rapids-blazing=0.19
 - matplotlib
-- jupyterlab=2.*
+- jupyterlab
 - nodejs
-- jedi=0.17.*
+- jedi
 - mpi4py
 - s3fs
 - pip
 - pip:
   - line_profiler
   - memory_profiler
-  - jupyterlab-nvdashboard
