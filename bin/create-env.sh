@@ -38,7 +38,6 @@ create_env() {
         echo "installing additional pip dependencies"
         echo ""
         COMMAND="conda activate dev && \
-            jupyter labextension install jupyterlab-nvdashboard && \
             ${HOROVOD_FLAGS_MACOS} pip install --no-cache-dir git+${HOROVOD_GIT}"
         echo "${COMMAND}"
         bash -c "${SOURCE_CONDA} && ${HOROVOD_FLAGS_MACOS} ${COMMAND}"
