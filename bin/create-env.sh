@@ -13,7 +13,8 @@ HOROVOD_FLAGS_MACOS="HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_WI
 
 HOROVOD_BUILD_CUDA_CC_LIST=70,75,80
 PYTORCH_HOROVOD_FLAGS_LINUX="HOROVOD_WITHOUT_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_GPU=CUDA HOROVOD_BUILD_CUDA_CC_LIST=${HOROVOD_BUILD_CUDA_CC_LIST} HOROVOD_GPU_OPERATIONS=NCCL HOROVOD_NCCL_LINK=SHARED"
-DEV_HOROVOD_FLAGS_LINUX="HOROVOD_WITHOUT_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_GPU=CUDA HOROVOD_BUILD_CUDA_CC_LIST=${HOROVOD_BUILD_CUDA_CC_LIST} HOROVOD_GPU_OPERATIONS=NCCL HOROVOD_NCCL_LINK=SHARED"
+TENSORFLOW_HOROVOD_FLAGS_LINUX="HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITHOUT_PYTORCH=1 HOROVOD_GPU=CUDA HOROVOD_BUILD_CUDA_CC_LIST=${HOROVOD_BUILD_CUDA_CC_LIST} HOROVOD_GPU_OPERATIONS=NCCL HOROVOD_NCCL_LINK=SHARED"
+DEV_HOROVOD_FLAGS_LINUX="HOROVOD_WITH_TENSORFLOW=1 HOROVOD_WITH_PYTORCH=1 HOROVOD_GPU=CUDA HOROVOD_BUILD_CUDA_CC_LIST=${HOROVOD_BUILD_CUDA_CC_LIST} HOROVOD_GPU_OPERATIONS=NCCL HOROVOD_NCCL_LINK=SHARED"
 
 HOROVOD_GIT="https://github.com/horovod/horovod.git@v0.21.3"
 
@@ -38,6 +39,7 @@ create_env() {
         echo "installing additional pip dependencies"
         echo ""
         COMMAND="conda activate dev && \
+            jupyter labextension install jupyterlab-nvdashboard && \
             ${HOROVOD_FLAGS_MACOS} pip install --no-cache-dir git+${HOROVOD_GIT}"
         echo "${COMMAND}"
         bash -c "${SOURCE_CONDA} && ${HOROVOD_FLAGS_MACOS} ${COMMAND}"
@@ -54,7 +56,7 @@ create_env() {
             bash -c "${SOURCE_CONDA} && conda deactivate && conda env remove --name tensorflow"
             CONDA_ENV_CREATE_COMMAND="conda env create --name tensorflow --file ${DIR}/../conda-environments/tensorflow-linux.yml"
             ADDITIONAL_PIP_COMMAND="conda activate tensorflow && \
-                echo 'none needed, skipping' "
+                ${TENSORFLOW_HOROVOD_FLAGS_LINUX} pip install --no-cache-dir git+${HOROVOD_GIT}"
         elif [[ ${CONDA_ENV_NAME} = "dev" ]]
         then
             bash -c "${SOURCE_CONDA} && conda deactivate && conda env remove --name dev"

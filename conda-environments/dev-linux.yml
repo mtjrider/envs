@@ -23,9 +23,9 @@ dependencies:
 - python=3.7
 - rapids-blazing
 - matplotlib
-- jupyterlab=2.*
+- jupyterlab
 - nodejs
-- jedi=0.17.*
+- jedi
 - mpi4py
 - s3fs
 - pip
@@ -34,7 +34,7 @@ dependencies:
   - ray[all]
   - cirq
   - cirq[contrib]
-  - qsimcirq   # git+...
+  - qsimcirq  # git+...
   - tensorboard
   - tensorflow-gpu==2.4
   - tensorflow-quantum

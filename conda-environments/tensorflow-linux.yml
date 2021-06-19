@@ -1,6 +1,6 @@
 name: dev
 channels:
-- rapidsai
+- rapidsai-nightly
 - nvidia
 - conda-forge
 dependencies:  
@@ -17,9 +17,9 @@ dependencies:
 - cudatoolkit=11.0
 - opt_einsum
 - python=3.7
-- rapids-blazing=0.19
+- rapids-blazing
 - matplotlib
-- jupyterlab=2.*
+- jupyterlab
 - nodejs
 - jedi
 - mpi4py

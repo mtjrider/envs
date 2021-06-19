@@ -1,6 +1,6 @@
 name: dev
 channels:
-- rapidsai
+- rapidsai-nightly
 - nvidia
 - pytorch
 - conda-forge
@@ -21,7 +21,7 @@ dependencies:
 - torchvision
 - opt_einsum
 - python=3.7
-- rapids-blazing=0.19
+- rapids-blazing
 - matplotlib
 - jupyterlab
 - nodejs
