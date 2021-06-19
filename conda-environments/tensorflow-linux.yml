@@ -32,7 +32,7 @@ dependencies:
   - cirq[contrib]
   - qsimcirq
   - tensorboard
-  - tensorflow-gpu
+  - tensorflow-gpu==2.4
   - tensorflow-quantum
   - tensorflow-probability
   - line_profiler

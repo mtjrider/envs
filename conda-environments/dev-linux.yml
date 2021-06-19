@@ -36,7 +36,7 @@ dependencies:
   - cirq[contrib]
   - qsimcirq   # git+...
   - tensorboard
-  - tensorflow-gpu
+  - tensorflow-gpu==2.4
   - tensorflow-quantum
   - line_profiler
   - memory_profiler
