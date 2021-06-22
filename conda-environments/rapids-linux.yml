@@ -20,5 +20,6 @@ dependencies:
 - s3fs
 - pip
 - pip:
+  - ipykernel
   - line_profiler
   - memory_profiler

@@ -30,6 +30,7 @@ dependencies:
 - s3fs
 - pip
 - pip:
+  - ipykernel
   - sparse
   - ray[all]
   - line_profiler
