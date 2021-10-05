@@ -30,12 +30,13 @@ dependencies:
 - s3fs
 - pip
 - pip:
+  - pybind11
   - ipykernel
   - sparse
   - ray[all]
   - cirq
   - cirq[contrib]
-  - qsimcirq  # git+...
+  # - git+https://github.com/quantumlib/qsim.git
   - tensorboard
   - tensorflow-gpu==2.4
   - tensorflow-quantum
