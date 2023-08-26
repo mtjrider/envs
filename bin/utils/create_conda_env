@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+export PATH=${PATH}:$(dirname $(readlink -f $0))
+
+num_args=$#
+while [[ $# -gt 0 ]]
+do
+  case $1 in
+    -cc=*|--clear-cache=*)
+      clear_cache="${1#*=}"
+      shift # past argument=value
+      ;;
+    -cc|--clear-cache)
+      clear_cache="${2}"
+      shift # past argument
+      shift # past value
+      ;;
+    -ef=*|--env-file=*)
+      env_file="${1#*=}"
+      shift # past argument=value
+      ;;
+    -ef|--env-file)
+      env_file="${2}"
+      shift # past argument
+      shift # past value
+      ;;
+    --default)
+      clear_cache="default"
+      env_file="default"
+      shift # past argument with no value
+      ;;
+    -*|--*)
+      concat "error: unknown option ${1}"
+      exit 1
+      ;;
+    *)
+      ;;
+  esac
+done
+
+case ${clear_cache} in
+  "t"|"true")
+    clear_cache="default"
+    ;;
+  "f"|"false")
+    clear_cache=""
+    ;;
+  *)
+    clear_cache="default"
+    ;;
+esac
+
+case ${env_file} in
+  "")
+    env_file="default"
+    ;;
+esac
+
+create_env () {
+  where_conda=$(conda_exists_where)
+  if [[ ${where_conda} = "" ]]
+  then
+    concat "error: conda not found"
+    exit 1
+  else
+    conda_profile="${where_conda}/etc/profile.d"
+    conda_profile=$(builtin cd -- ${conda_profile} && pwd)
+    source_conda_command="source ${conda_profile}/conda.sh"
+  fi
+  if [[ ${clear_cache} = "default" ]]
+  then
+    conda_clean_command="conda clean --all --yes"
+  fi
+  if [[ ${env_file} = "default" ]]
+  then
+    env_file="linux-pytorch-cpu.yml"
+  fi
+  if [[ ${env_file} != "" ]]
+  then
+    env_file_path=$(readlink -f ${env_file})
+    if [[ -f ${env_file_path} ]]
+    then
+      conda_create_command="conda env create --file ${env_file_path}"
+      command=$(concat "${source_conda_command} &&
+        ${conda_clean_command} &&
+        ${conda_create_command}")
+      bash -c "${command}"
+    else
+      concat "error: env file does not
+        exist at this location: ${env_file_path}"
+      exit 1
+    fi
+  fi
+}
+
+create_env

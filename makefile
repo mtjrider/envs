@@ -1,63 +1,53 @@
+.PHONY: install.pytorch-cpu
+.PHONY: install.pytorch-cuda
 # conda linux targets aliases
-.PHONY: install.rapids
-.PHONY: install.linux.rapids
-.PHONY: install.linux.pytorch
-.PHONY: install.linux.tensorflow
-.PHONY: install.linux.dev
+.PHONY: install.linux.pytorch-cpu
+.PHONY: install.linux.pytorch-cuda-11.7
+.PHONY: install.linux.pytorch-cuda-11.8
 # conda linux environments aliases
-.PHONY: install.conda.linux.env.pytorch
-.PHONY: install.conda.linux.env.tensorflow
-.PHONY: install.conda.linux.env.dev
-# conda macos targets aliases
-.PHONY: install.macos.dev
-# conda macos environments aliases
-.PHONY: install.conda.macos.env.dev
+.PHONY: install.conda.linux.env.pytorch-cpu
+.PHONY: install.conda.linux.env.pytorch-cuda-11.7
+.PHONY: install.conda.linux.env.pytorch-cuda-11.8
 # conda install aliases
-.PHONY: install.conda.macos
 .PHONY: install.conda.linux
 # conda reinstall aliases
 .PHONY: reinstall.conda.linux
-.PHONY: reinstall.conda.macos
 
-install.linux.pytorch: install.conda.linux
-install.linux.pytorch: install.conda.linux.env.pytorch
+install.pytorch-cpu: install.linux.pytorch-cpu
+install.pytorch-cuda: install.linux.pytorch-cuda-11.8
 
-install.linux.tensorflow: install.conda.linux
-install.linux.tensorflow: install.conda.linux.env.tensorflow
+install.linux.pytorch-cpu: install.conda.linux
+install.linux.pytorch-cpu: install.conda.linux.env.pytorch-cpu
 
-install.linux.dev: install.conda.linux
-install.linux.dev: install.conda.linux.env.dev
+install.linux.pytorch-cuda-11.7: install.conda.linux
+install.linux.pytorch-cuda-11.7: install.conda.linux.env.pytorch-cuda-11.7
 
-install.macos.dev: install.conda.macos
-install.macos.dev: install.conda.macos.env.dev
-
-install.rapids: install.linux.rapids
-install.linux.rapids: install.conda.linux
-install.linux.rapids: install.conda.linux.env.rapids
+install.linux.pytorch-cuda-11.8: install.conda.linux
+install.linux.pytorch-cuda-11.8: install.conda.linux.env.pytorch-cuda-11.8
 
 install.conda.linux:
-	bash bin/install-conda.sh linux .
-
-install.conda.macos:
-	bash bin/install-conda.sh macOS .
+	bash bin/utils/install_conda \
+		--reinstall default \
+		--operating-system linux \
+		--source-url https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
 reinstall.conda.linux:
-	bash bin/install-conda.sh linux . 1
+	bash bin/utils/install_conda \
+		--reinstall true \
+		--operating-system linux \
+		--source-url https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
-reinstall.conda.macos:
-	bash bin/install-conda.sh macOS . 1
+install.conda.linux.env.pytorch-cpu:
+	bash bin/utils/create_conda_env \
+		--clear-cache true \
+		--env-file conda-environments/linux-pytorch-cpu.yml
 
-install.conda.linux.env.pytorch:
-	bash bin/create-env.sh linux ./conda 1 pytorch pytorch-linux.yml
+install.conda.linux.env.pytorch-cuda-11.7:
+	bash bin/utils/create_conda_env \
+		--clear-cache true \
+		--env-file conda-environments/linux-pytorch-cu117.yml
 
-install.conda.linux.env.tensorflow:
-	bash bin/create-env.sh linux ./conda 1 tensorflow tensorflow-linux.yml
-
-install.conda.linux.env.dev:
-	bash bin/create-env.sh linux ./conda 1 dev dev-linux.yml
-
-install.conda.linux.env.rapids:
-	bash bin/create-env.sh linux ./conda 1 rapids rapids-linux.yml
-
-install.conda.macos.env.dev:
-	bash bin/create-env.sh macOS ./conda 1
+install.conda.linux.env.pytorch-cuda-11.8:
+	bash bin/utils/create_conda_env \
+		--clear-cache true \
+		--env-file conda-environments/linux-pytorch-cu118.yml

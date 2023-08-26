@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+export PATH=${PATH}:$(dirname $(readlink -f $0))
+
+detect_os () {
+  local detected_os=$(echo $(uname) | tr '[:upper:]' '[:lower:]')
+  echo ${detected_os}
+}
+
+detected_os=$(detect_os)
+echo ${detected_os}

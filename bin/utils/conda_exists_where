@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+export PATH=${PATH}:$(dirname $(readlink -f $0))
+
+while [[ $# -gt 0 ]]
+do
+  case $1 in
+    -p=*|--prefix=*)
+      prefix="${1#*=}"
+      shift # past argument=value
+      ;;
+    -p|--prefix)
+      prefix="${2}"
+      shift # past argument
+      shift # past value
+      ;;
+    --default)
+      prefix="default"
+      shift # past argument with no value
+      ;;
+    -*|--*)
+      concat "error: unknown option ${1}"
+      exit 1
+      ;;
+    *)
+      ;;
+  esac
+done
+
+case ${prefix} in
+  "")
+    prefix="default"
+    ;;
+esac
+
+conda_exists_where () {
+  which_conda=$(which conda)
+  if [[ ${which_conda} = "" ]]
+  then
+    echo ""
+    return 1
+  fi
+  if [[ ${prefix} = "default" ]]
+  then
+    conda_parent_path="$(dirname ${which_conda})/.."
+    if [[ ${conda_parent_path} != "" ]]
+    then
+      prefix=$(builtin cd -- ${conda_parent_path} && pwd)
+      echo ${prefix}
+      return 0
+    fi
+  elif [[ ${prefix} != "" ]]
+  then
+    if [[ -d ${prefix} ]]
+    then
+      echo ${prefix}
+      return 0
+    else
+      echo ""
+      return 1
+    fi
+  fi
+}
+
+where_conda=$(conda_exists_where)
+echo ${where_conda}

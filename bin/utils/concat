@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+export PATH=${PATH}:$(dirname $(readlink -f $0))
+
+concat () {
+    printf '%s' "$*"
+}
+
+echo $(concat $@)
+

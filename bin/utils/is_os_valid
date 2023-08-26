@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+export PATH=${PATH}:$(dirname $(readlink -f $0))
+
+while [[ $# -gt 0 ]]
+do
+  case $1 in
+    -os=*|--operating-system=*)
+      operating_system="${1#*=}"
+      shift # past argument=value
+      ;;
+    -os|--operating-system)
+      operating_system="${2}"
+      shift # past argument
+      shift # past value
+      ;;
+    --default)
+      operating_system="default"
+      shift # past argument with no value
+      ;;
+    -*|--*)
+      concat "error: unknown option ${1}"
+      exit 1
+      ;;
+    *)
+      ;;
+  esac
+done
+
+case ${operating_system} in
+  "")
+    operating_system="default"
+    ;;
+esac
+
+is_os_valid () {
+  if [[ ${operating_system} = "default" ]]
+  then
+    operating_system="linux"
+  fi
+  local detected_os=$(detect_os)
+  local target_os=$(echo ${operating_system} | tr '[:upper:]' '[:lower:]')
+  if [[ ${detected_os} != ${target_os} ]]
+  then
+    echo "false"
+    return 1
+  fi
+  echo "true"
+  return 0
+}
+
+valid_os=$(is_os_valid)
+echo ${valid_os}

@@ -1,0 +1,13 @@
+name: pytorch-cpu
+channels:
+  - conda-forge
+dependencies:
+  - python
+  - numpy
+  - scipy
+  - pip
+  - pip:
+    - --index-url https://download.pytorch.org/whl/cpu
+    - torchvision
+    - torchaudio
+    - torch
