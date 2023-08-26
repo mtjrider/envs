@@ -40,14 +40,14 @@ reinstall.conda.linux:
 install.conda.linux.env.pytorch-cpu:
 	bash bin/utils/create_conda_env \
 		--clear-cache true \
-		--env-file conda-environments/linux-pytorch-cpu.yml
+		--env-file .conda/environments/linux-pytorch-cpu.yml
 
 install.conda.linux.env.pytorch-cuda-11.7:
 	bash bin/utils/create_conda_env \
 		--clear-cache true \
-		--env-file conda-environments/linux-pytorch-cu117.yml
+		--env-file .conda/environments/linux-pytorch-cu117.yml
 
 install.conda.linux.env.pytorch-cuda-11.8:
 	bash bin/utils/create_conda_env \
 		--clear-cache true \
-		--env-file conda-environments/linux-pytorch-cu118.yml
+		--env-file .conda/environments/linux-pytorch-cu118.yml
