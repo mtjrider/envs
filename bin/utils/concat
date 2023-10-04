@@ -6,4 +6,3 @@ concat () {
 }
 
 echo $(concat $@)
-
