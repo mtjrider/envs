@@ -87,15 +87,15 @@ esac
 
 deactivate_all_conda_envs () {
   where_conda=$(conda_exists_where)
-  if [[ ${where_conda} != "" ]]
+  if [[ "${where_conda}" != "" ]]
   then
     conda_profile="${where_conda}/etc/profile.d"
-    conda_profile=$(builtin cd -- ${conda_profile} && pwd)
+    conda_profile="$(builtin cd -- ${conda_profile} && pwd)"
     source_conda_command="source ${conda_profile}/conda.sh"
   fi
   if [[ ${CONDA_SHLVL} != "" ]]
   then
-    for i in $(seq ${CONDA_SHLVL})
+    for i in $(seq "${CONDA_SHLVL}")
     do
       command="${source_conda_command} &&\
         conda deactivate"
@@ -106,14 +106,14 @@ deactivate_all_conda_envs () {
 }
 
 maybe_uninstall_conda () {
-  if [[ ${reinstall} = "default" ]]
+  if [[ "${reinstall}" == "default" ]]
   then
     reinstall="false"
   fi
-  where_conda=$(conda_exists_where)
-  if [[ ${where_conda} != "" ]]
+  where_conda="$(conda_exists_where)"
+  if [[ "${where_conda}" != "" ]]
   then
-    if [[ ${reinstall} = "true" ]]
+    if [[ "${reinstall}" == "true" ]]
     then
       deactivate_all_conda_envs
       bash -c "rm -rf ${where_conda}"
@@ -123,50 +123,50 @@ maybe_uninstall_conda () {
 }
 
 install_conda () {
-  detected_os=$(detect_os)
-  valid_os=$(is_os_valid --operating-system ${operating_system})
-  if [[ ${valid_os} = "false" ]]
+  detected_os="$(detect_os)"
+  valid_os="$(is_os_valid --operating-system ${operating_system})"
+  if [[ "${valid_os}" = "false" ]]
   then
     concat "error: target os (${operating_system})
       does not match detected os (${detected_os})"
     exit 1
   fi
-  if [[ ${prefix} = "default" ]]
+  if [[ "${prefix}" = "default" ]]
   then
-    prefix_dir=$(pwd)
+    prefix_dir="$(pwd)"
     prefix_arg="-p ${prefix_dir}/conda"
   elif [[ ${prefix} != "" ]]
   then
-    if [[ -d ${prefix} ]]
+    if [[ -d "${prefix}" ]]
     then
-      prefix_dir=$(builtin cd -- ${prefix} && pwd)
+      prefix_dir="$(builtin cd -- ${prefix} && pwd)"
       prefix_arg="-p ${prefix_dir}/conda"
     fi
-  elif [[ ${prefix} = "" ]]
+  elif [[ "${prefix}" == "" ]]
   then
     prefix_arg=""
   fi
-  if [[ ${source_url} = "default" ]]
+  if [[ "${source_url}" == "default" ]]
   then
-    source_url="https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh"
-  elif [[ ${source_url} != "" ]]
-  then
-    curl_command="curl -L ${source_url} -o miniconda.sh"
-    command="${curl_command} &&
-      bash miniconda.sh -b -u ${prefix_arg} &&
-      rm -f miniconda.sh &&
-      ${prefix_dir}/conda/bin/conda init"
-    command=$(concat ${command})
+    kernel_name="$(uname)"
+    machine_arch="$(uname -m)"
+    source_url="https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-${kernel_name}-${machine_arch}.sh"
   fi
-  if [[ ${command} != "" ]]
+  curl_command="curl -L ${source_url} -o miniforge.sh"
+  command="${curl_command} &&
+    bash miniforge.sh -b -u ${prefix_arg} &&
+    rm -f miniforge.sh &&
+    ${prefix_dir}/conda/bin/conda init"
+  command=$(concat ${command})
+  if [[ "${command}" != "" ]]
   then
     bash -c "${command}"
   fi
 }
 
 maybe_uninstall_conda
-where_conda=$(conda_exists_where)
-if [[ ${where_conda} = "" ]]
+where_conda="$(conda_exists_where)"
+if [[ "${where_conda}" = "" ]]
 then
   install_conda
 else

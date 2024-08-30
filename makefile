@@ -25,13 +25,13 @@ install.conda.linux:
 	bash bin/utils/install_conda \
 		--reinstall default \
 		--operating-system linux \
-		--source-url https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+		--source-url default
 
 reinstall.conda.linux:
 	bash bin/utils/install_conda \
 		--reinstall true \
 		--operating-system linux \
-		--source-url https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+		--source-url default
 
 install.conda.linux.env:
 	@if [[ -f ${from} ]]; then \
